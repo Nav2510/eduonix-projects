@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+  body
+    nav.navbar.fixed-top.navbar-expand-md.navbar-dark.bg-dark
+      a.navbar-brand(href='#') PCRepair
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarNav.collapse.navbar-collapse
+        ul.navbar-nav
+          li.nav-item(class=title=='Home' ? 'active' : undefined)
+            a.nav-link(href='/') Home
+          li.nav-item(class=title=='About' ? 'active' : undefined)
+            a.nav-link(href='/about') About
+          li.nav-item(class=title=='Services' ? 'active' : undefined)
+            a.nav-link(href='/services') Services
+          li.nav-item(class=title=='Contact' ? 'active' : undefined)
+            a.nav-link(href='/contact') Contact
+    .container
+      block content
+    
+    hr
+    footer
+      p PCRepair &copy; 2019
