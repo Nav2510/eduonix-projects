@@ -10,6 +10,7 @@ const app = express();
 
 
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
 const uri = "mongodb+srv://admin:1654899.Nav@todoapp-pzsnr.mongodb.net/test?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
@@ -40,7 +41,36 @@ app.get('/', (req, res, next) => {
       return console.log(err);
     }
     console.log(todos);
-    res.render('index');
+    res.render('index', {
+      todos : todos
+    });
+  });
+});
 
+app.post('/todo/add', (req, res, next) => {
+  //Create Todo
+  const todo = {
+    text : req.body.text,
+    body : req.body.body
+  };
+
+  Todos.insert(todo, (err, result) => {
+    if (err) {
+      return console.log(err);
+    }
+    console.log('Todo added');
+    res.redirect('/');
+  });
+});
+
+app.delete('/todo/delete/:id', (req, res, next) => {
+  const query = {_id : ObjectID(req.params.id)};
+  console.log(query);
+  Todos.deleteOne(query, (err, response) => {
+    if (err) {
+      return console.log(err);
+    }
+    console.log('Todo deleted');
+    res.send(200);
   });
 });

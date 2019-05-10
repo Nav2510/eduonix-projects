@@ -1,2 +1,3 @@
-#untracked
+#List the files to untrack
 node_modules
+yarn
