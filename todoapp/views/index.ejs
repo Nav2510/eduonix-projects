@@ -10,9 +10,12 @@
     </div>
     <button type="submit" name="button">Submit</button>
   </form>
-  <ul>
+  <ul class='todo-list'>
     <% todos.forEach(function(todo) { %>
-      <li><%= todo.text %> - <%= todo.body %> <a data-id="<%= todo._id %>" href="#" class="delete-todo">Delete</a></li>
+      <li class='todo-list-item'><%= todo.text %> - <%= todo.body %>
+        <a data-id="<%= todo._id %>" href="#" class="delete-todo">Delete</a>
+        <a href="/todo">Edit</a>
+      </li>
     <% }) %>
   </ul>
 <% include ../views/partials/footer %>

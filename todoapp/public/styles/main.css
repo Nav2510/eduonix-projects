@@ -1,0 +1,15 @@
+.container {
+  font-family: 'roboto';
+  font-weight: 400;
+  font-size: 1rem;
+  border: 1px solid red;
+}
+.todo-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.todo-list-item {
+  margin: 0.2rem;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.04);
+}
