@@ -11,7 +11,7 @@ const app = express();
 
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
-const uri = "mongodb+srv://admin:1654899.Nav@todoapp-pzsnr.mongodb.net/test?retryWrites=true";
+const uri = "mongodb+srv://admin:<password>@todoapp-pzsnr.mongodb.net/test?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 //Connecting to mongodb client
