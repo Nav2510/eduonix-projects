@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const fs = require('fs');
 
 //Port
 const port = 3000;
@@ -8,22 +9,29 @@ const port = 3000;
 //Init app
 const app = express();
 
-
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
-const uri = "mongodb+srv://admin:<password>@todoapp-pzsnr.mongodb.net/test?retryWrites=true";
-const client = new MongoClient(uri, { useNewUrlParser: true });
 
-//Connecting to mongodb client
-client.connect((err, database) => {
-  console.log('MongoDB Atlas Connected...');
-  if (err) throw err;
+fs.readFile('./public/credential.json',{encoding: 'utf-8'}, (error, file) => {
+  if (error) {
+    throw error;
+  }
+  const credentialJSON = JSON.parse(file);
+  const uri = "mongodb+srv://"+credentialJSON.user+":"+credentialJSON.pass+"@todoapp-pzsnr.mongodb.net/test?retryWrites=true";
+  console.log(uri);
+  const client = new MongoClient(uri, { useNewUrlParser: true });
 
-  Todos = client.db("todoAppDb").collection("todos");
+  //Connecting to mongodb client
+  client.connect((err, database) => {
+    console.log('MongoDB Atlas Connected...');
+    if (err) throw err;
 
-  app.listen(port, () => {
-    console.log('Server running on port '+ port);
-  });;
+    Todos = client.db("todoAppDb").collection("todos");
+
+    app.listen(port, () => {
+      console.log('Server running on port '+ port);
+    });;
+  });
 });
 
 //Body Parser Middleware
