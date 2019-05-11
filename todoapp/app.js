@@ -12,13 +12,13 @@ const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 
+// Fetching credentials from credential.json for connecting to MongoDB Atlas cloud
 fs.readFile('./public/credential.json',{encoding: 'utf-8'}, (error, file) => {
   if (error) {
     throw error;
   }
   const credentialJSON = JSON.parse(file);
   const uri = "mongodb+srv://"+credentialJSON.user+":"+credentialJSON.pass+"@todoapp-pzsnr.mongodb.net/test?retryWrites=true";
-  console.log(uri);
   const client = new MongoClient(uri, { useNewUrlParser: true });
 
   //Connecting to mongodb client

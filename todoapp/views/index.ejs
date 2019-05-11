@@ -10,12 +10,25 @@
     </div>
     <button type="submit" name="button">Submit</button>
   </form>
+  <!-- todo-list -->
   <ul class='todo-list'>
     <% todos.forEach(function(todo) { %>
-      <li class='todo-list-item'><%= todo.text %> - <%= todo.body %>
-        <a data-id="<%= todo._id %>" href="#" class="delete-todo">Delete</a>
-        <a href="/todo">Edit</a>
+      <li class='todo-list-item'>
+        <div class="todo-item-header">
+          <div class="todo-header-content"><%= todo.text %>
+          </div>
+          <div class="todo-action-wrapper">
+            <a data-id="<%= todo._id %>" href="#" class="delete-todo action-icons-link">
+              <i class="material-icons action-icons">delete</i>
+            </a>
+            <a class="action-icons-link" href="/todo"><i class="material-icons action-icons">edit</i></a>
+          </div>
+        </div>
+        <div class="todo-item-content">
+          <%= todo.body %>
+        </div>
       </li>
     <% }) %>
   </ul>
+  <!-- end of todo-list -->
 <% include ../views/partials/footer %>
