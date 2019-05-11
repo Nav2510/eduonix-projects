@@ -72,6 +72,7 @@ app.post('/todo/add', (req, res, next) => {
 });
 
 app.delete('/todo/delete/:id', (req, res, next) => {
+  console.log('query-->'+req.params.id);
   const query = {_id : ObjectID(req.params.id)};
   console.log(query);
   Todos.deleteOne(query, (err, response) => {

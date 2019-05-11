@@ -1,7 +1,8 @@
 $(document).ready(() => {
   $('.delete-todo').on('click', (e) => {
     $target = $(e.target);
-    const id = $target.attr('data-id');
+    const id = ($target.attr('data-id'))? $target.attr('data-id'): $target.parent().attr('data-id');
+    console.log(id);
     $.ajax({
       type : 'DELETE',
       url : '/todo/delete/'+id,
@@ -14,31 +15,18 @@ $(document).ready(() => {
       }
     });
   });
-  $('.todo-list-item').on('mouseenter', (e) => {
+  $('.todo-list-item').on('click', (e) => {
     $target = $(e.target);
-    $childDisplay = $target.children('.todo-item-content');
-    $siblingDisplay = $target.siblings('.todo-item-content');
-    if ($childDisplay) {
+    $childDisplay = $target.children('.todo-item-content').css('display');
+    $siblingDisplay = $target.siblings('.todo-item-content').css('display');
+    if ($childDisplay && $childDisplay == 'none') {
       $target.children('.todo-item-content').show();
-    } else if ($siblingDisplay) {
-      $target.siblings('.todo-item-content').show();
-    }
-  });
-  $('.todo-list-item').on('mouseleave', (e) => {
-    $target = $(e.target);
-    $childDisplay = $target.children('.todo-item-content');
-    $siblingDisplay = $target.siblings('.todo-item-content');
-    if ($childDisplay) {
+    } else if ($childDisplay && $childDisplay == 'block') {
       $target.children('.todo-item-content').hide();
-    } else if ($siblingDisplay) {
+    } else if ($siblingDisplay && $siblingDisplay == 'none' ) {
+      $target.siblings('.todo-item-content').show();
+    } else if ($siblingDisplay && $siblingDisplay == 'block' ) {
       $target.siblings('.todo-item-content').hide();
     }
   });
 });
-
-function showDiv() {
-  console.log('this');
-  // $element = $('.')
-  //   $target = $(e.target);
-  //   $target.children('.todo-item-content').hide();
-}
