@@ -48,7 +48,6 @@ app.get('/', (req, res, next) => {
     if (err) {
       return console.log(err);
     }
-    console.log(todos);
     res.render('index', {
       todos : todos
     });
@@ -62,6 +61,7 @@ app.post('/todo/add', (req, res, next) => {
     body : req.body.body
   };
 
+  //Insert Todo
   Todos.insert(todo, (err, result) => {
     if (err) {
       return console.log(err);
@@ -72,14 +72,39 @@ app.post('/todo/add', (req, res, next) => {
 });
 
 app.delete('/todo/delete/:id', (req, res, next) => {
-  console.log('query-->'+req.params.id);
   const query = {_id : ObjectID(req.params.id)};
-  console.log(query);
   Todos.deleteOne(query, (err, response) => {
     if (err) {
       return console.log(err);
     }
     console.log('Todo deleted');
     res.send(200);
+  });
+});
+
+app.get('/todo/edit/:id', (req, res, next) => {
+  const query = {_id : ObjectID(req.params.id)};
+  Todos.find(query).next((err, todo) => {
+    if (err) {
+      return console.log(err);
+    }
+     res.render('edit', {
+       todo : todo
+    });
+  });
+});
+
+app.post('/todo/edit/:id', (req, res, next) => {
+  const query = {_id : ObjectID(req.params.id)};
+  const todo = {
+    text : req.body.text,
+    body : req.body.body
+  };
+  Todos.updateOne(query, {$set :todo}, (err, response) => {
+    if (err) {
+      return console.log(err);
+    }
+    console.log('Todo Edited...');
+    res.redirect('/');
   });
 });
