@@ -68,7 +68,7 @@ body {
 
 .todo-item-content {
   display: none;
-  height: 4.5rem;
+  max-height: 13.5rem;
   font-size: 0.8rem;
   color: #787878;
   overflow: hidden;
