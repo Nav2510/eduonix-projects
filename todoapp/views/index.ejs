@@ -1,0 +1,58 @@
+<% include ../views/partials/header %>
+<!-- modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form class="" action="/todo/add" method="post">
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="">Todo Name</label>
+              <input class="form-control" type="text" name="text" placeholder="Add Todo">
+            </div>
+            <div class="form-group">
+              <label for="">Todo Body</label>
+              <textarea class="form-control" name="body" placeholder="Add Body"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" name="button">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- end of modal -->
+  <div class="container">
+    <!-- add button -->
+    <i data-toggle="modal" data-target="#myModal" class="material-icons action-icons add-button">add</i>
+    <!-- end of add button -->
+    <div class="main-header">
+      <h3>My Todos</h3>
+    </div>
+    <!-- todo-list -->
+    <ul class='todo-list'>
+      <% todos.forEach(function(todo) { %>
+        <li class='todo-list-item'>
+          <div class="todo-header-content"><%= todo.text %>
+          </div>
+          <div class="todo-action-wrapper">
+            <i data-id="<%= todo._id %>" href="#" class="material-icons delete-todo delete-icon action-icons-link">
+              delete
+            </i>
+            <a class="action-icons-link edit-icon" href="/todo/edit/<%= todo._id %>"><i class="material-icons action-icons">edit</i></a>
+          </div>
+          <div class="todo-item-content">
+            <div class="todo-body"><%= todo.body %></div>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+    <!-- end of todo-list -->
+  </div>
+<% include ../views/partials/footer %>
